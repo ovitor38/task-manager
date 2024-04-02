@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import TaskItem from "./components/TaskItem";
+import axios from "axios";
 
 const App = () => {
     const [tasks, setTasks] = useState([
-        {
-            id: "1",
-            description: "Estudar Programação",
-            isCompleted: true,
-        },
-        {
-            id: "2",
-            description: "Ler",
-            isCompleted: false,
-        },
+        
     ]);
+
+    useEffect(() => {
+        fetchTasks();
+    }, []);
+
+    const fetchTasks = async () => {
+        try {
+            const {data} = await axios.get("http://localhost:8000/tasks");
+            setTasks(data)
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <>
