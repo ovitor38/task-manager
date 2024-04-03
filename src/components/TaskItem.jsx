@@ -1,8 +1,19 @@
 import { AiOutlineDelete } from "react-icons/ai";
+import axios from "axios";
 
 import "./TaskItem.scss";
+import { useAlert } from "react-alert";
 
 const TaskItem = ({ task }) => {
+    const alert = useAlert();
+    const handleTaskDeletion = async () => {
+        try {
+            await axios.delete(`http://localhost:8000/tasks/${task._id}`);
+        } catch (error) {
+            alert.error("Houve um erro");
+        }
+    };
+
     return (
         <div className="task-item-container">
             <div className="task-description">
@@ -25,7 +36,11 @@ const TaskItem = ({ task }) => {
                 </label>
             </div>
             <div className="delete">
-                <AiOutlineDelete  size={18} color="#f97474"/>
+                <AiOutlineDelete
+                    size={18}
+                    color="#f97474"
+                    onClick={handleTaskDeletion}
+                />
             </div>
         </div>
     );
