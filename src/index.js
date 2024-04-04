@@ -22,7 +22,6 @@ root.render(
             <App />
         </AlertProvider>
     </React.StrictMode>,
-    document.getElementById("root")
 );
 
 reportWebVitals();
