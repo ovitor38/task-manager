@@ -10,13 +10,15 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleSignInClick = () => {
-        navigate("/");
+        navigate("/Victor");
     };
 
     return (
         <div className="login-container">
             <img src={logo} alt="Full Stack Club" />
-            <CustomButton onClick={handleSignInClick}>Entrar</CustomButton>
+            <div className="button-container">
+                <CustomButton onClick={handleSignInClick}>Entrar</CustomButton>
+            </div>
         </div>
     );
 };
