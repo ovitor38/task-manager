@@ -14,7 +14,7 @@ const TaskItem = ({ task, fetchTasks }) => {
             await fetchTasks();
 
             alert.success("Tarefa deletada com sucesso");
-        } catch (error) {
+        } catch (_error) {
             alert.error("Houve um erro");
         }
     };
@@ -30,7 +30,7 @@ const TaskItem = ({ task, fetchTasks }) => {
             await fetchTasks()
 
             alert.success("A Tarefa foi modificada com sucesso")
-        } catch (error) {
+        } catch (_error) {
             alert.error("Houve um erro");
         }
     };

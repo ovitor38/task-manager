@@ -4,22 +4,25 @@ import axios from "axios";
 import "./Tasks.scss";
 import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
+import { useAlert } from "react-alert";
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-        fetchTasks();
-    }, []);
+    const alert = useAlert();
 
     const fetchTasks = async () => {
         try {
             const { data } = await axios.get("http://localhost:8000/tasks");
             setTasks(data);
-        } catch (error) {
-            console.log(error);
+        } catch (_error) {
+            alert.error("Erro ao busrcar as tarefas");
         }
     };
+
+    useEffect(() => {
+        fetchTasks();
+    }, []);
 
     return (
         <div className="tasks-container">
@@ -32,7 +35,11 @@ const Tasks = () => {
                     {tasks
                         .filter((task) => task.isCompleted === false)
                         .map((lastTask) => (
-                            <TaskItem task={lastTask} fetchTasks={fetchTasks} />
+                            <TaskItem
+                                key={lastTask._id}
+                                task={lastTask}
+                                fetchTasks={fetchTasks}
+                            />
                         ))}
                 </div>
             </div>
@@ -43,7 +50,11 @@ const Tasks = () => {
                     {tasks
                         .filter((task) => task.isCompleted)
                         .map((lastTask) => (
-                            <TaskItem task={lastTask} fetchTasks={fetchTasks} />
+                            <TaskItem
+                                key={lastTask._id}
+                                task={lastTask}
+                                fetchTasks={fetchTasks}
+                            />
                         ))}
                 </div>
             </div>
