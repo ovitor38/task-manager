@@ -7,6 +7,7 @@ import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 const options = {
     position: positions.BOTTOM_CENTER,
@@ -18,10 +19,12 @@ const options = {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <AlertProvider template={AlertTemplate} {...options}>
-            <App />
-        </AlertProvider>
-    </React.StrictMode>,
+        <BrowserRouter>
+            <AlertProvider template={AlertTemplate} {...options}>
+                <App />
+            </AlertProvider>
+        </BrowserRouter>
+    </React.StrictMode>
 );
 
 reportWebVitals();
