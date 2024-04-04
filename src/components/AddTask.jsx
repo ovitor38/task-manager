@@ -11,7 +11,7 @@ import axios from "axios";
 const AddTask = ({ fetchTasks }) => {
     const [task, setTask] = useState("");
 
-    alert = useAlert();
+    const alert = useAlert();
 
     const onChange = (e) => {
         setTask(e.target.value);
@@ -33,6 +33,9 @@ const AddTask = ({ fetchTasks }) => {
             await fetchTasks();
 
             setTask("");
+
+            alert.success("Tarefa adicionada com sucesso");
+            
         } catch (error) {
             alert.erro("Algo deu errado");
         }
