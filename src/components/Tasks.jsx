@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 import "./Tasks.scss";
@@ -11,18 +11,18 @@ const Tasks = () => {
 
     const alert = useAlert();
 
-    const fetchTasks = async () => {
+    const fetchTasks = useCallback(async () => {
         try {
             const { data } = await axios.get("http://localhost:8000/tasks");
             setTasks(data);
         } catch (_error) {
             alert.error("Erro ao busrcar as tarefas");
         }
-    };
+    }, [alert]);
 
     useEffect(() => {
         fetchTasks();
-    }, []);
+    }, [fetchTasks]);
 
     return (
         <div className="tasks-container">
